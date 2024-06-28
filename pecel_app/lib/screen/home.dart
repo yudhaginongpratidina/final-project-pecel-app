@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_polygon_clipper/flutter_polygon_clipper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:pecel_app/components/btn_menu_header.dart';
-import 'package:pecel_app/components/card_promo.dart';
+import 'package:pecel_app/screen/cart_screen.dart';
+import 'package:pecel_app/screen/home_screen.dart';
+import 'package:pecel_app/screen/menu_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,130 +17,14 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 200,
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: CardSwiper(
-                    maxAngle: 0.0,
-                    allowedSwipeDirection:
-                        const AllowedSwipeDirection.only(left: true),
-                    backCardOffset: const Offset(0, 0),
-                    padding: const EdgeInsets.all(2.0),
-                    cardsCount: 5,
-                    cardBuilder: (context, index, percentThresholdX,
-                            percentThresholdY) =>
-                        const CardPromo(),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 100,
-            child: ListView(
-              padding: const EdgeInsets.all(8.0),
-              scrollDirection: Axis.horizontal,
-              children: [
-                BtnMenuHeader(
-                  title: 'Home',
-                  icon: FontAwesomeIcons.bowlRice,
-                  onPressed: () {},
-                  backgroundColor: Colors.green,
-                  width: 100,
-                ),
-                BtnMenuHeader(
-                  title: 'Menu Terlaris',
-                  icon: FontAwesomeIcons.utensils,
-                  onPressed: () {},
-                  backgroundColor: Colors.red,
-                  width: 50,
-                ),
-                BtnMenuHeader(
-                  title: 'Minuman',
-                  icon: FontAwesomeIcons.mugHot,
-                  onPressed: () {},
-                  backgroundColor: Colors.blue,
-                  width: 100,
-                ),
-              ],
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              'Menu Pilihan',
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: List.generate(
-                  7,
-                  (index) => Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(0),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(0.0),
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            'assets/images/pecel2.jpg',
-                            width: 90,
-                            height: 90,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  color: Colors.orange,
-                                  width: size.width - 120,
-                                  child: const Row(
-                                    children: [
-                                      Icon(Icons.star, size: 20),
-                                      Text('4.5'),
-                                    ],
-                                  ),
-                                ),
-                                const Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Pecel Sambel Tumpang',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text('Pecel, Sambel, Telur Bali'),
-                                  ],
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
+      body: bodyTabSelected(),
+
+      // ================================================================================================
+      // TODO : MEMBUAT FLOATING BUTTON BERBENTUK POLYGON DENGAN BANTIAN FLUUTER CLIP POLYGON
+      // ================================================================================================
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
+      floatingActionButton: SizedBox(
         width: 84,
         height: 84,
         child: FlutterClipPolygon(
@@ -152,7 +36,15 @@ class _HomeState extends State<Home> {
               backgroundColor: Colors.yellowAccent,
               shape: const CircleBorder(),
             ),
-            onPressed: () {},
+
+            // ==============================================================================================
+            // TODO : KETIKA FLOATING BUTTON INI DIKLIK, MAKA AKAN MENGARAHKAN KE HALAMAN MENU SCREEN
+            // ==============================================================================================
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const MenuScreen();
+              }));
+            },
             child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -166,7 +58,18 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
+
+      // ================================================================================================
+      // TODO : MEMBUAT BUTTON NAVIGATION
+      // ================================================================================================
       bottomNavigationBar: BottomNavigationBar(
+        // ================================================================================================
+        // TODO :
+        //-------------------------------------------------------------------------------------------------
+        // SETIAP KALI BUTTON NAVIGATION DI PILIH, MAKA NILAI DARI VARIABLE TAB SELECTED AKAN DI PERBARUI
+        // DAN AKAN DILAKUKAN PENGECEKAN DENGAN SWITH CASE UNTUK MENJALANKAN FUNGSI BERDASARKAN INDEX,
+        //  INDEX DIMULAI DARI 0.
+        // ================================================================================================
         currentIndex: tabSelected,
         onTap: (value) {
           setState(() {
@@ -193,5 +96,22 @@ class _HomeState extends State<Home> {
         ],
       ),
     );
+  }
+
+  Widget bodyTabSelected() {
+    // ===============================================================================================
+    // TODO : MENGGUNAKAN SWITCH CASE UNTUK MENJALANKAN FUNGSI BERDASARKAN INDEX
+    // -----------------------------------------------------------------------------------------------
+    // FUNGSI INI AKAN MEMANGGIL HALAMAN TERTENTU
+    // JIKA TABSELECTED ADALAH 0, MAKA FUNGSI INI AKAN MENJALANKAN FUNGSI HOME SCREEN
+    // ===============================================================================================
+    switch (tabSelected) {
+      case 0:
+        return HomeScreen();
+      case 1:
+        return CartScreen();
+      default:
+        return const SizedBox();
+    }
   }
 }

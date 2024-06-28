@@ -32,7 +32,7 @@ class BtnMenuHeader extends StatelessWidget {
             icon,
             color: backgroundColor != null ? Colors.white : Colors.green,
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             title,
             style: TextStyle(

@@ -1,9 +1,14 @@
-// card_promo.dart
-
 import 'package:flutter/material.dart';
 
 class CardPromo extends StatefulWidget {
-  const CardPromo({Key? key}) : super(key: key);
+  final String title;
+  final String description;
+
+  const CardPromo({
+    Key? key,
+    required this.title,
+    required this.description,
+  }) : super(key: key);
 
   @override
   _CardPromoState createState() => _CardPromoState();
@@ -15,7 +20,7 @@ class _CardPromoState extends State<CardPromo> {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: const AssetImage('assets/images/pecel.jpg'),
+          image: AssetImage('assets/images/pecel.jpg'),
           fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(
             Colors.black.withOpacity(0.5),
@@ -29,9 +34,10 @@ class _CardPromoState extends State<CardPromo> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           Text(
-            'Promo 20%',
+            widget
+                .title, // Menggunakan widget.title untuk mengakses properti title
             style: TextStyle(
               color: Colors.yellow,
               fontSize: 30,
@@ -40,7 +46,8 @@ class _CardPromoState extends State<CardPromo> {
           ),
           SizedBox(height: 8),
           Text(
-            'Untuk 10 Pembeli Pertama',
+            widget
+                .description, // Menggunakan widget.description untuk mengakses properti description
             style: TextStyle(
               color: Colors.white,
               fontSize: 18,
