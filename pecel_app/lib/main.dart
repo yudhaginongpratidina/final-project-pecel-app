@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pecel_app/screen/home_screen.dart';
+import 'package:pecel_app/screen/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       // -------------------------------------------------------------------------------
       // HALAMAN YANG PERTAMA KALI DI TAMPILKAN
       // -------------------------------------------------------------------------------
-      home: const HomeScreen(),
+      home: Home(),
     );
   }
 }
