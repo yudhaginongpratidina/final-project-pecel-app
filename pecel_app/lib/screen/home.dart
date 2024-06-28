@@ -3,60 +3,40 @@ import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_polygon_clipper/flutter_polygon_clipper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pecel_app/components/btn_menu_header.dart';
+import 'package:pecel_app/components/card_promo.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
-  _HomeState createState() => _HomeState();
+  State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
   int tabSelected = 0;
 
-  List<Container> cards = [
-    Container(
-      alignment: Alignment.center,
-      child: const Text('1'),
-      color: Colors.blue,
-    ),
-    Container(
-      alignment: Alignment.center,
-      child: const Text('2'),
-      color: Colors.red,
-    ),
-    Container(
-      alignment: Alignment.center,
-      child: const Text('3'),
-      color: Colors.purple,
-    )
-  ];
-
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('PECEL APP'),
-        backgroundColor: Colors.deepPurpleAccent,
-        foregroundColor: Colors.white,
-      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 150,
+            height: 200,
             child: Stack(
               children: [
                 Positioned.fill(
                   child: CardSwiper(
+                    maxAngle: 0.0,
                     allowedSwipeDirection:
-                        AllowedSwipeDirection.only(left: true),
-                    backCardOffset: Offset(0, 0),
-                    padding: EdgeInsets.all(8.0),
-                    cardsCount: cards.length,
+                        const AllowedSwipeDirection.only(left: true),
+                    backCardOffset: const Offset(0, 0),
+                    padding: const EdgeInsets.all(2.0),
+                    cardsCount: 5,
                     cardBuilder: (context, index, percentThresholdX,
                             percentThresholdY) =>
-                        cards[index],
+                        const CardPromo(),
                   ),
                 ),
               ],
@@ -65,26 +45,26 @@ class _HomeState extends State<Home> {
           SizedBox(
             height: 100,
             child: ListView(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               scrollDirection: Axis.horizontal,
               children: [
                 BtnMenuHeader(
                   title: 'Home',
-                  icon: Icons.home,
+                  icon: FontAwesomeIcons.bowlRice,
                   onPressed: () {},
                   backgroundColor: Colors.green,
                   width: 100,
                 ),
                 BtnMenuHeader(
                   title: 'Menu Terlaris',
-                  icon: Icons.home,
+                  icon: FontAwesomeIcons.utensils,
                   onPressed: () {},
                   backgroundColor: Colors.red,
                   width: 50,
                 ),
                 BtnMenuHeader(
                   title: 'Minuman',
-                  icon: Icons.home,
+                  icon: FontAwesomeIcons.mugHot,
                   onPressed: () {},
                   backgroundColor: Colors.blue,
                   width: 100,
@@ -106,27 +86,34 @@ class _HomeState extends State<Home> {
                 children: List.generate(
                   7,
                   (index) => Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(0),
+                    ),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(0.0),
                       child: Row(
                         children: [
-                          Image.network(
-                            'https://picsum.photos/250?image=9',
+                          Image.asset(
+                            'assets/images/pecel2.jpg',
                             width: 90,
+                            height: 90,
                           ),
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  children: [
-                                    Icon(Icons.star,
-                                        size: 24, color: Colors.orangeAccent),
-                                    Text('4.5'),
-                                  ],
+                                Container(
+                                  color: Colors.orange,
+                                  width: size.width - 120,
+                                  child: const Row(
+                                    children: [
+                                      Icon(Icons.star, size: 20),
+                                      Text('4.5'),
+                                    ],
+                                  ),
                                 ),
-                                Column(
+                                const Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [

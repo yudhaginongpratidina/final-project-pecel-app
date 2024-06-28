@@ -5,7 +5,7 @@ class BtnMenuHeader extends StatelessWidget {
   final IconData icon;
   final Color? backgroundColor;
   final VoidCallback? onPressed;
-  final int width;
+  final double width;
 
   const BtnMenuHeader({
     Key? key,
@@ -22,7 +22,7 @@ class BtnMenuHeader extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: backgroundColor ?? Colors.green,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-        padding: EdgeInsets.symmetric(horizontal: width.toDouble()),
+        padding: EdgeInsets.symmetric(horizontal: width),
       ),
       onPressed: onPressed,
       child: Column(
@@ -32,6 +32,7 @@ class BtnMenuHeader extends StatelessWidget {
             icon,
             color: backgroundColor != null ? Colors.white : Colors.green,
           ),
+          SizedBox(height: 8),
           Text(
             title,
             style: TextStyle(

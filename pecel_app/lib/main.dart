@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       // -------------------------------------------------------------------------------
       // HALAMAN YANG PERTAMA KALI DI TAMPILKAN
       // -------------------------------------------------------------------------------
-      home: Home(),
+      home: const Home(),
     );
   }
 }
